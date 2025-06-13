@@ -1,19 +1,20 @@
 import React from 'react';
-import Link from 'next/link';
+
 import HeroSectionText from './HeroSectionText';
 const HeroSection = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden flex">
         <div className="absolute inset-0"></div>
       {/* Left background */}        
-      <div className="absolute inset-y-0 left-0 w-1/4 sm:w-1/5 z-0">
+      <div className="absolute z-10 inset-y-0 left-0 w-1/4 sm:w-1/5 ">
         <div className="w-full h-full bg-pattern"></div>
-
+         <div className="absolute inset-0 bg-black opacity-30"></div>
       </div>
 
       {/* Right background */}
-      <div className="absolute inset-y-0 right-0 w-1/4 sm:w-1/5 z-0">
+      <div className="absolute inset-y-0 right-0 w-1/4 sm:w-1/5 z-10">
         <div className="w-full h-full bg-pattern"></div>
+         <div className="absolute inset-0 bg-black z-30 opacity-30"></div>
       </div>
 
 <HeroSectionText/>
