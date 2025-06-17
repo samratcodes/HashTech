@@ -1,62 +1,72 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import HeroSectionText from './HeroSectionText';
+import Navbar from '../Navbar';
+import StatsSection from './StatsSection';
 const HeroSection = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size to window size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Matrix rain effect
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops: number[] = Array(columns).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0F0';
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = '#';
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    };
+
+    const interval = setInterval(draw, 33);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden flex">
-        <div className="absolute inset-0"></div>
-      {/* Left background */}        
-      <div className="absolute inset-y-0 left-0 w-1/4 sm:w-1/5 z-0">
-        <div className="w-full h-full bg-pattern"></div>
+    <div className="relative w-full h-screen overflow-hidden flex flex-col bg-black">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        style={{ opacity: 0.7 }}
+      />
+      
+      <Navbar />
+      <HeroSectionText />
 
-      </div>
-
-      {/* Right background */}
-      <div className="absolute inset-y-0 right-0 w-1/4 sm:w-1/5 z-0">
-        <div className="w-full h-full bg-pattern"></div>
-      </div>
-
-<HeroSectionText/>
-
-      {/* Styles */}
-      <style>{`
-        :root {
-          --l: #0D71BA;
-          --b: #fffdfd;
-          --w: 104px;
-        }
-
-        .bg-pattern {
-          background: var(--b);
-          animation: weee 10s linear infinite;
-          background-image:
-            linear-gradient(45deg, var(--l) 0% 14.2857%, transparent 14.2857% 28.5714%, var(--l) 28.5714% 42.8571%, transparent 42.8571% 57.1429%, var(--l) 57.1429% 71.4286%, transparent 71.4286% 85.7143%, var(--l) 85.7143% 100%),
-            linear-gradient(-45deg, var(--l) 0% 14.2857%, transparent 14.2857% 28.5714%, var(--l) 28.5714% 42.8571%, transparent 42.8571% 57.1429%, var(--l) 57.1429% 71.4286%, transparent 71.4286% 85.7143%, var(--l) 85.7143% 100%),
-            linear-gradient(45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(-45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(-45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(-45deg, var(--l) 0% 30.7692%, transparent 30.7692% 61.5385%, var(--l) 61.5385% 92.3077%, transparent 92.3077%),
-            linear-gradient(45deg, var(--l) 0% 14.2857%, transparent 14.2857% 28.5714%, var(--l) 28.5714% 42.8571%, transparent 42.8571% 57.1429%, var(--l) 57.1429% 71.4286%, transparent 71.4286% 85.7143%, var(--l) 85.7143% 100%),
-            linear-gradient(-45deg, var(--l) 0% 14.2857%, transparent 14.2857% 28.5714%, var(--l) 28.5714% 42.8571%, transparent 42.8571% 57.1429%, var(--l) 57.1429% 71.4286%, transparent 71.4286% 85.7143%, var(--l) 85.7143% 100%);
-          background-size: 50px 20px, 50px 20px, 50px 80px, 50px 80px, 50px 80px, 50px 80px, 50px 80px, 50px 80px;
-          background-position-x: 4px, 54px,
-            calc(var(--w) * 1 + 4px), calc(var(--w) * 1 + 54px),
-            calc(var(--w) * 2 + 4px), calc(var(--w) * 2 + 54px),
-            calc(var(--w) * 3 + 4px), calc(var(--w) * 3 + 54px),
-            calc(var(--w) * 4 + 4px), calc(var(--w) * 4 + 54px);
-          background-repeat: repeat-y;
-          height: 100%;
-          width: 100%;
-        }
-
-        @keyframes weee {
-          to {
-            background-position-y: 800px, 800px, 1040px, 1040px, 1360px, 1360px, 1040px, 1040px;
-          }
-        }
-      `}</style>
     </div>
   );
 };
