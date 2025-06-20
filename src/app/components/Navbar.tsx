@@ -74,6 +74,7 @@ const Navbar = () => {
             <button
               className="md:hidden focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? (
                 <FaTimes className={`text-2xl ${textColor}`} />
@@ -91,7 +92,7 @@ const Navbar = () => {
         <div className="flex flex-col p-6 space-y-8">
           <div className="flex justify-between items-center">
             <span className="text-xl font-bold text-blue-400">Hash Tech</span>
-            <button onClick={() => setIsMenuOpen(false)}>
+            <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
               <FaTimes className="text-2xl text-blue-400" />
             </button>
           </div>

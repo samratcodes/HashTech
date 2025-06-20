@@ -1,6 +1,6 @@
+
 import HeroSection from "./components/LandingPage/HeroSection";
 import WhatWeDo from "./components/LandingPage/WhatWeDo";
-import Loader from "./components/Loader";
 import StatsSection from "./components/LandingPage/StatsSection";
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
     <div className="bg-white relative">
       <HeroSection />
       <WhatWeDo />
+      <StatsSection />
     </div>
   );
 }

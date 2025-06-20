@@ -57,7 +57,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex flex-col bg-black">
+    <div className="relative w-full h-screen min-h-[600px] overflow-hidden flex flex-col bg-black">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0"
