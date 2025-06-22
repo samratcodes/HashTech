@@ -1,13 +1,21 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import HeroSectionText from './HeroSectionText';
 import Navbar from '../Navbar';
 import StatsSection from './StatsSection';
+
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -54,18 +62,21 @@ const HeroSection = () => {
       clearInterval(interval);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [mounted]);
 
   return (
     <div className="relative w-full h-screen min-h-[600px] overflow-hidden flex flex-col bg-black">
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-0"
-        style={{ opacity: 0.7 }}
-      />
+      {mounted && (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 z-0"
+          style={{ opacity: 0.7 }}
+        />
+      )}
       
       <Navbar />
       <HeroSectionText />
+      <StatsSection/>
 
     </div>
   );

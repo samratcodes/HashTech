@@ -2,7 +2,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaCode, FaPaintBrush, FaSearch, FaMobileAlt, FaPenNib } from 'react-icons/fa';
-import StatsSection from './StatsSection';
 
 interface Service {
   icon: React.ReactElement<React.ComponentProps<'svg'>>;
@@ -91,6 +90,30 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle, delay 
         .card-glow:hover {
           box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
         }
+
+        .background-icon {
+          transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover .background-icon {
+          filter: blur(8px);
+          opacity: 0.1;
+        }
+
+        .text-content {
+          transition: all 0.3s ease-in-out;
+          transform: translateY(0);
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          right: 20px;
+        }
+
+        .card:hover .text-content {
+          transform: translateY(-20px);
+          bottom: 50%;
+          transform: translateY(50%);
+        }
       `}</style>
 
       <motion.div
@@ -98,55 +121,55 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle, delay 
         initial={{ opacity: 0, y: 50 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1.5, delay }}
-        className="relative w-[280px] h-[320px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 rounded-[25px] flex flex-col items-center justify-center text-white transition-all duration-500 ease-in-out shadow-xl hover:scale-105 hover:-translate-y-3 overflow-hidden shimmer-effect card-glow border border-gray-600/30"
+        className="relative w-[240px] h-[280px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 rounded-[25px] px-6 text-white transition-all duration-500 ease-in-out shadow-xl hover:scale-105 hover:-translate-y-3 overflow-hidden shimmer-effect card-glow border-2 border-primary card"
       >
-        {/* Floating Background Icon */}
-        <div className="text-[120px] absolute z-10 text-white/5 float-animation transition-all duration-500 ease-in-out">
+        {/* Floating Icon in Background */}
+        <div className="text-[100px] absolute z-10 text-primary/30 float-animation transition-all duration-500 ease-in-out right-4 top-6 background-icon">
           {icon}
         </div>
 
-        {/* Hover Content */}
-        <div className="opacity-0 hover:opacity-100 z-20 transition-all duration-500 text-center px-6 transform translate-y-4 hover:translate-y-0">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-            <div className="text-2xl text-white">
-              {icon}
+        {/* Main Card Content */}
+        <div className="relative z-20 flex flex-col gap-4 text-content">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xl font-bold gradient-text">{title}</p>
+              <p className="text-xs font-semibold text-primary leading-relaxed mt-1">{subtitle}</p>
+            </div>
+            <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-full w-12 h-12 flex items-center justify-center ml-2">
+              <div className="text-white text-lg">
+                {icon}
+              </div>
             </div>
           </div>
-          <p className="text-2xl font-bold gradient-text mb-2">{title}</p>
-          <p className="text-sm text-gray-300 leading-relaxed">{subtitle}</p>
-        </div>
-
-        {/* Always-visible Bottom Label - Hidden on hover */}
-        <div className="absolute bottom-6 z-30 text-lg text-white font-semibold opacity-90 transition-all duration-300 hover:opacity-0 group-hover:opacity-0">
-          {shortTitle}
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full opacity-60"></div>
-        <div className="absolute bottom-4 left-4 w-1 h-1 bg-purple-500 rounded-full opacity-40"></div>
+        <div className="absolute top-4 right-4 w-2 h-2 bg-[#FFA500] rounded-full opacity-60"></div>
+        <div className="absolute bottom-4 left-4 w-1 h-1 bg-[#FFA500] rounded-full opacity-40"></div>
       </motion.div>
     </>
   );
 };
 
 const WhatWeDo = () => {
-  return (<>
-
-    <div className="min-h-screen w-full bg-gradient-to-b from-black to-white text-white py-20 px-6 flex flex-col items-center">
-    <div className='-mt-48 w-full'>
-    <StatsSection/>
-  </div>
-
-      <motion.h2
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-b from-black to-white text-white py-10 px-6 flex md:flex-row-reverse flex-col items-center">
+      <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
-        className="text-4xl mt-16 md:text-5xl font-bold text-center mb-16 text-blue-700"
+        className="text-center w-96 mb-16 mt-16"
       >
-        What We Do
-      </motion.h2>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+          Transforming Ideas Into Reality
+        </h2>
+        <p className="text-base md:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
+          Web, Mobile, Marketing, Design.
+        </p>
+      </motion.div>
+
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {services.map((service, index) => (
           <ServiceCard
             key={index}
@@ -158,7 +181,6 @@ const WhatWeDo = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 
