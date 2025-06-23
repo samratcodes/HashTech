@@ -82,7 +82,7 @@ const HeroSectionText = () => {
         transition={{ delay: 0.9, duration: 0.6 }}
         className="mt-8 flex flex-col sm:flex-row gap-6 justify-center"
       >
-        <Link href="/get-started">
+        <Link href="/contact">
           <button
             className={`relative flex items-center gap-2 px-6 py-1 border-2 border-primary hover:scale-105 font-semibold rounded-full overflow-hidden cursor-pointer
               text-base transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
@@ -111,7 +111,7 @@ const HeroSectionText = () => {
           </button>
         </Link>
         
-        <Link href="/services">
+        <Link href="/aboutus">
           <button
             className="relative flex items-center gap-2 px-8 py-3 font-semibold rounded-full overflow-hidden cursor-pointer
               text-base transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group text-gray-300 hover:text-white
