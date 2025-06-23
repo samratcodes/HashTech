@@ -19,7 +19,7 @@ const navbarConfig = {
   ],
   cta: {
     label: 'Free Consultation',
-    href: '/get-started',
+    href: '/contact',
   },
 };
 

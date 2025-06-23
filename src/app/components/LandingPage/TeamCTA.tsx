@@ -17,7 +17,7 @@ const TeamCTA = () => (
       <p className="text-lg mb-6 text-gray-100">
         Let's discuss how our team can help bring your vision to life.
       </p>
-      <Link href="/get-started" className='flex items-center justify-center w-full'>
+      <Link href="/contact" className='flex items-center justify-center w-full'>
         <button
           className={`relative flex items-center justify-center gap-2 px-6 py-1 border-2 border-primary hover:scale-105 font-semibold rounded-full overflow-hidden cursor-pointer
             text-base transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
