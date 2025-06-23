@@ -20,27 +20,26 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  {
+{
     name: "Chandan Dhakal",
-    role: "CEO ",
-    image: "/Chandan.jpg",
-    bio: "Full-stack developer with 8+ years of experience in modern web technologies. Passionate about creating scalable and user-friendly applications.",
+    role: "CEO / Backend Developer",
+    image: "/Chandan.jpeg",
+    bio: "Backend developer focused on building robust, scalable, and secure server-side applications. Skilled in designing APIs, managing databases, and optimizing performance for seamless user experiences.",
     social: {
-      github: "https://github.com/alexjohnson",
-      linkedin: "https://linkedin.com/in/alexjohnson",
-      twitter: "https://twitter.com/alexjohnson",
-      email: "alex@hashtech.com"
+      github: "https://github.com/chandandhakal",
+      linkedin: "https://linkedin.com/in/chandandhakal",
+      email: "chandandhakal18@gmail.com"
     }
   },
   {
     name: "Samrat Sapkota",
     role: "CTO / FullStack Developer",
     image: "/samrat.jpg",
-    bio: "Creative designer focused on creating intuitive and beautiful user experiences. Expert in Figma, Adobe Creative Suite, and design systems.",
+    bio: "Full-stack developer skilled in Next.js, Node.js, and databases like MongoDB and PostgreSQL. Builds scalable web apps and understands DevOps workflows.",
     social: {
-      linkedin: "https://linkedin.com/in/sarahchen",
-      twitter: "https://twitter.com/sarahchen",
-      email: "sarah@hashtech.com"
+      github: "https://github.com/samratcodes",
+      linkedin: "https://www.linkedin.com/in/samrat-sapkota-08b107253/",
+      email: "samratcodess@gmail.com"
     }
   },
   {
@@ -58,21 +57,20 @@ const teamMembers: TeamMember[] = [
     name: "Prithak Adhikari",
     role: "Backend Developer",
     image: "/prithak.jpg",
-    bio: "iOS and Android developer with expertise in React Native and Flutter. Creates seamless mobile experiences across platforms.",
+    bio: "Backend developer skilled in Django, Node.js, PHP, and a range of databases including MySQL, PostgreSQL, and MongoDB. Experienced in building robust APIs and understands DevOps for streamlined deployment and infrastructure.",
     social: {
-      github: "https://github.com/emilywatson",
-      linkedin: "https://linkedin.com/in/emilywatson",
-      email: "emily@hashtech.com"
+      github: "https://github.com/PrithakADHI",
+      linkedin: "https://www.linkedin.com/in/prithak-adhikari-55999624a/",
     }
   },
   {
     name: "Pranish Karki",
-    role: "Mobile developer",
+    role: "Mobile developer/Frontend Developer",
     image: "/pranish.jpg",
-    bio: "Experienced project manager who ensures smooth delivery of projects on time and within budget while maintaining high quality standards.",
+    bio: "Mobile and frontend developer skilled in Flutter and Next.js, focused on crafting responsive UIs and seamless user experiences with clean, maintainable code.",
     social: {
-      linkedin: "https://linkedin.com/in/lisathompson",
-      email: "lisa@hashtech.com"
+      linkedin: "https://www.linkedin.com/in/pranish-karki-820607285/",
+      github: "https://github.com/Infinite172",
     }
     
   },
