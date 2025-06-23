@@ -57,7 +57,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
           transition={{ duration: 0.3 }}
         >
           <motion.p
-            className="text-white text-sm mb-3 font-semibold bg-black/10 rounded-3xl w-max p-2"
+            className="text-white text-sm mb-3 md:flex hidden font-semibold bg-black/10 rounded-3xl w-max p-2"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.1 }}
@@ -71,7 +71,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
           >
             <Link 
               href={project.link}
-              className="bg-primary px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 hover:bg-blue-800 text-white transition-transform duration-200 w-fit"
+              className="bg-primary px-2 py-2 md:px-5 md:py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 hover:bg-blue-800 text-white transition-transform duration-200 w-fit"
             >
               View Project
             </Link>
@@ -167,9 +167,9 @@ export default function Home() {
       
       <div className="w-full px-7 py-8">
         {/* Flexbox Grid */}
-        <div className="flex w-full gap-4 h-screen text-xs sm:text-base">
+        <div className="flex flex-col md:flex-row w-full gap-4 h-screen text-xs sm:text-base">
           {/* Left Column */}
-          <div className="w-[70%] flex h-full flex-col gap-4">
+          <div className="w-[100%] md:w-[70%] flex h-full flex-col gap-4">
             {/* Top Image */}
             <ProjectCard
               project={projects[0]}
@@ -209,7 +209,7 @@ export default function Home() {
           </div>
 
           {/* Right Column */}
-          <div className="w-[30%] flex h-full flex-col gap-4">
+          <div className="w-[100%] md:w-[30%] flex h-full flex-col gap-4">
             <ProjectCard
               project={projects[4]}
               hoveredImage={hoveredImage}
