@@ -20,7 +20,6 @@ const ContactPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen w-full bg-black text-white py-10 px-6">
         {/* Header Section */}
         <motion.div

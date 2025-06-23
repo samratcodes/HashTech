@@ -2,7 +2,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaCode, FaPaintBrush, FaSearch, FaMobileAlt, FaPenNib, FaUsers, FaLightbulb } from 'react-icons/fa';
-import Navbar from '@/app/components/Navbar';
 import StatsSection from '@/app/components/LandingPage/StatsSection';
 import TeamCTA from '@/app/components/LandingPage/TeamCTA';
 
@@ -164,8 +163,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle, delay 
 const WhatWeDo = () => {
   return (
     <>
-      <Navbar/>
-      
       {/* Hero Section */}
       <div className="min-h-screen w-full bg-black text-white py-10 px-6">
         {/* Header Section */}

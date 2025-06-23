@@ -74,7 +74,6 @@ const HeroSection = () => {
         />
       )}
       
-      <Navbar />
       <HeroSectionText />
       <StatsSection/>
 

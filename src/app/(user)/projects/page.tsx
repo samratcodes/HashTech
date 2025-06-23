@@ -203,8 +203,6 @@ const ProjectsPage = () => {
 
   return (
     <>
-      <Navbar />
-      
       <div className="bg-black min-h-screen">
         {/* Hero Section */}
         <div className="py-20 px-6">
