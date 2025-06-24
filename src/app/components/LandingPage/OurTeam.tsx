@@ -43,14 +43,14 @@ const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: "Michael Rodriguez",
-    role: "Digital Marketing Specialist",
-    image: "/api/placeholder/150/150",
-    bio: "Marketing expert with deep knowledge in SEO, SEM, and social media strategies. Helps businesses grow their digital presence effectively.",
+    name: "Sanskriti Poudel",
+    role: "Graphics Designer",
+    image: "/sanskriti.jpeg",
+    bio: "Graphic designer focused on building strong brand visuals. Passionate about clear design and creative expression.",
     social: {
-      linkedin: "https://linkedin.com/in/michaelrodriguez",
-      twitter: "https://twitter.com/michaelrodriguez",
-      email: "michael@hashtech.com"
+      github: "https://github.com/Sanskriti-poudel",
+      linkedin: "https://www.linkedin.com/in/sanskriti-poudel-a52b45296",
+      email: "sanskritipoudel36@gmail.com"
     }
   },
   {
