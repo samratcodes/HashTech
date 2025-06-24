@@ -142,34 +142,37 @@ const TeamMemberCard: React.FC<{ member: TeamMember; delay: number }> = ({ membe
         {/* Social Links */}
         <div className="flex justify-center space-x-3">
           {member.social.github && (
-            <a
+            <Link
               href={member.social.github}
+              passHref
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition-all duration-300"
             >
               <FaGithub size={14} />
-            </a>
+            </Link>
           )}
           {member.social.linkedin && (
-            <a
+            <Link
               href={member.social.linkedin}
+              passHref
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition-all duration-300"
             >
               <FaLinkedin size={14} />
-            </a>
+            </Link>
           )}
           {member.social.twitter && (
-            <a
+            <Link
               href={member.social.twitter}
+              passHref
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition-all duration-300"
             >
               <FaTwitter size={14} />
-            </a>
+            </Link>
           )}
           {member.social.email && (
             <a

@@ -239,63 +239,63 @@ const ProjectsPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="flex w-full gap-4 h-screen text-xs sm:text-base"
+              className="flex flex-col md:flex-row w-full gap-4 md:h-screen text-xs sm:text-base"
             >
               {/* Left Column */}
-              <div className="w-[70%] flex h-full flex-col gap-4">
+              <div className="w-full md:w-[70%] flex h-full flex-col gap-4">
                 {/* Top Image */}
                 <ProjectCard
                   project={projects[0]}
                   hoveredImage={hoveredImage}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="h-[30%]"
+                  className="h-[200px] md:h-[30%]"
                 />
 
                 {/* Bottom Images */}
-                <div className="relative flex h-[70%] w-full gap-4">
+                <div className="relative flex flex-col md:flex-row h-[400px] md:h-[70%] w-full gap-4">
                   <ProjectCard
                     project={projects[1]}
                     hoveredImage={hoveredImage}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    className="h-full w-1/2"
+                    className="h-1/2 md:h-full w-full md:w-1/2"
                   />
                   
-                  <div className="relative flex flex-col h-full w-1/2 gap-4">
+                  <div className="relative flex flex-row md:flex-col h-1/2 md:h-full w-full md:w-1/2 gap-4">
                     <ProjectCard
                       project={projects[2]}
                       hoveredImage={hoveredImage}
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
-                      className="h-1/2"
+                      className="w-1/2 md:w-full h-full md:h-1/2"
                     />
                     <ProjectCard
                       project={projects[3]}
                       hoveredImage={hoveredImage}
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
-                      className="h-1/2"
+                      className="w-1/2 md:w-full h-full md:h-1/2"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Right Column */}
-              <div className="w-[30%] flex h-full flex-col gap-4">
+              <div className="w-full md:w-[30%] flex h-full flex-col gap-4 mt-4 md:mt-0">
                 <ProjectCard
                   project={projects[4]}
                   hoveredImage={hoveredImage}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="h-1/2"
+                  className="h-[150px] md:h-1/2"
                 />
                 <ProjectCard
                   project={projects[5]}
                   hoveredImage={hoveredImage}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="h-1/2"
+                  className="h-[150px] md:h-1/2"
                 />
               </div>
             </motion.div>
