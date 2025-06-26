@@ -153,13 +153,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle, delay 
 
 const WhatWeDo = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-black to-white text-white py-10 px-6 flex md:flex-row-reverse flex-col items-center">
+    <div className="min-h-screen w-screen overflow-hidden sm:w-full bg-gradient-to-b from-black to-white text-white py-10 px-6 flex md:flex-row-reverse flex-col items-center">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
-        className="text-center w-96 mb-16 mt-16"
+        className="text-center w-80 sm:w-96 mb-16 mt-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
           Transforming Ideas Into Reality

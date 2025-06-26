@@ -53,7 +53,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full rounded-b-full z-50 transition-all duration-300 h-14 ${mounted && scrolled ? 'bg-white shadow-lg backdrop-blur-md' : 'bg-transparent'}`}>
+      <nav className={`fixed top-0 w-full rounded-b-full z-50 transition-all duration-300 h-14 ${mounted && scrolled ? 'bg-black/70 shadow-lg backdrop-blur-md' : 'bg-transparent'}`}>
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}

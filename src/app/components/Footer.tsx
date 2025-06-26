@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -13,6 +14,18 @@ const Footer = () => {
             <span className="text-xl font-bold text-primary tracking-wide">Hash Tech</span>
           </div>
           <p className="text-gray-400 text-sm max-w-xs text-center md:text-left">Empowering your brand with secure, simple, and smart digital solutions.</p>
+          {/* Social Media Icons */}
+          <div className="flex gap-4 mt-2">
+            <a href="https://www.instagram.com/hashtech_innovations/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram className="w-5 h-5 hover:text-accent transition-colors" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61577184515639" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebook className="w-5 h-5 hover:text-accent transition-colors" />
+            </a>
+            <a href="https://www.linkedin.com/company/hashtech-innovations/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin className="w-5 h-5 hover:text-accent transition-colors" />
+            </a>
+          </div>
         </div>
         {/* Footer Links - 3 Columns */}
         <div className="flex flex-col sm:flex-row gap-8 w-full md:w-2/3 justify-center md:justify-end">

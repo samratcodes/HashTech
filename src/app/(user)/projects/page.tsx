@@ -33,7 +33,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
 
   return (
     <div 
-      className={`relative group cursor-pointer ${className}`}
+      className={`relative group cursor-pointer  bg-primary/20  rounded-2xl ${className}`}
       onMouseEnter={() => onMouseEnter(project.id)}
       onMouseLeave={onMouseLeave}
     >
@@ -42,7 +42,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
         alt={project.alt}
         fill
         quality={100}
-        className={`rounded-lg object-cover p-4 transition-all duration-300 ${
+        className={`rounded-3xl object-cover p-4 transition-all duration-300 ${
           isOtherHovered ? 'blur-sm scale-95' : ''
         } ${isHovered ? 'scale-105' : ''}`}
       />
