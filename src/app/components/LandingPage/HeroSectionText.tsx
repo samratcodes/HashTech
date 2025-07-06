@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValue, animate } from 'framer-motion';
 
-
 const Counter = ({ target, label }: { target: number; label: string }) => {
   const count = useMotionValue(0);
   const [display, setDisplay] = useState(0);
@@ -32,6 +31,60 @@ const Counter = ({ target, label }: { target: number; label: string }) => {
 };
 
 const HeroSectionText = () => {
+  const [currentWord, setCurrentWord] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const words = ['Smart', 'Secure', 'Simple'];
+
+  useEffect(() => {
+    const typeWord = async (word: string) => {
+      setIsTyping(true);
+      setIsDeleting(false);
+      setDisplayText('');
+      
+      // Type the word character by character
+      for (let i = 0; i < word.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 80));
+        setDisplayText(word.substring(0, i + 1));
+      }
+      
+      setIsTyping(false);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    };
+
+    const deleteWord = async (word: string) => {
+      setIsDeleting(true);
+      setIsTyping(false);
+      
+      // Delete the word character by character
+      for (let i = word.length; i >= 0; i--) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+        setDisplayText(word.substring(0, i));
+      }
+      
+      setIsDeleting(false);
+      await new Promise(resolve => setTimeout(resolve, 300));
+    };
+
+    const cycleWords = async () => {
+      while (true) {
+        // Cycle through individual words
+        for (let i = 0; i < words.length; i++) {
+          await typeWord(words[i]);
+          await deleteWord(words[i]);
+        }
+      }
+    };
+
+    const timer = setTimeout(() => {
+      cycleWords();
+    }, 1500); // Start after the main title animation
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 bg-transparent">
       <motion.div
@@ -44,7 +97,7 @@ const HeroSectionText = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="inline-block px-4 py-1 mb-4 text-sm font-semibold text-white bg-accent/80 rounded-full backdrop-blur-sm"
+          className="hidden sm:inline-block px-6 py-2 mb-6 text-sm font-semibold text-white bg-accent/70 rounded-full backdrop-blur-md shadow-lg "
         >
           Welcome to the Future of Tech
         </motion.span>
@@ -53,41 +106,94 @@ const HeroSectionText = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+        >
+          <span className="relative"> 
+          <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           className="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-[#4169e1] to-accent drop-shadow-lg"
         >
           Hash Tech
         </motion.h1>
+                       <motion.div
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </span>
+        </motion.h1>
       </motion.div>
 
-      <motion.p
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="mt-4 text-xl sm:text-2xl text-primary font-semibold text-center"
+        className="mt-8 text-2xl sm:text-3xl font-bold text-center min-h-[4rem] flex items-center justify-center"
       >
-        Secure, Simple & Smart Solutions
-      </motion.p>
+        <span className="relative inline-block align-bottom">
+          <span className="bg-clip-text text-white drop-shadow-lg relative z-10">
+            {displayText}
+            {/* Animated Underline absolutely positioned under text */}
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: (isTyping || isDeleting) ? 1 : 0.8 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute left-0 bottom-0 h-[0.18em] w-full bg-gradient-to-r from-blue-400 via-[#4169e1] to-accent rounded-full shadow-lg z-0"
+              style={{
+                opacity: displayText.length > 0 ? 1 : 0,
+                pointerEvents: 'none',
+              }}
+            />
+          </span>
+          {(isTyping || isDeleting) && (
+            <motion.span 
+              className="inline-block w-1 h-6 bg-gradient-to-b from-blue-400 to-accent ml-2 rounded-full shadow-lg align-bottom"
+              animate={{ 
+                opacity: [1, 0, 1],
+                scaleY: [1, 1.3, 1],
+                boxShadow: [
+                  "0 0 10px rgba(59, 130, 246, 0.8)",
+                  "0 0 20px rgba(59, 130, 246, 0.4)",
+                  "0 0 10px rgba(59, 130, 246, 0.8)"
+                ]
+              }}
+              transition={{ 
+                duration: 1,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          )}
+        </span>
+      </motion.div>
 
       <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-        className="mt-6 max-w-2xl text-base font-medium sm:text-lg hidden md:flex text-white/80 text-center leading-relaxed"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+        className="mt-8 text-base sm:text-lg text-white text-center max-w-lg mx-auto leading-relaxed font-medium bg-black/20 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/10 shadow-lg"
       >
-        Empower your brand with cutting-edge digital solutions. </motion.p>
+        Book free IT consultations and marketing strategies
+      </motion.p>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.9, duration: 0.6 }}
-        className="mt-8 flex flex-col sm:flex-row gap-6 justify-center"
+        className="mt-8 sm:mt-10 flex flex-col gap-4 sm:flex-row sm:gap-6 justify-center w-full max-w-md"
       >
         <Link href="/contact">
           <button
-            className={`relative flex items-center gap-2 px-6 py-1 border-2 border-primary hover:scale-105 font-semibold rounded-full overflow-hidden cursor-pointer
+            className={`relative flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-primary hover:scale-105 font-semibold rounded-full overflow-hidden cursor-pointer
               text-base transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-              group text-white shadow-[0_0_0_2px_theme('colors.primary')]
-              hover:bg-primary hover:text-white hover:shadow-xl active:scale-95`}
+              group text-white shadow-[0_0_20px_rgba(59,130,246,0.3)]
+              hover:bg-primary hover:text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] active:scale-95 backdrop-blur-sm w-full sm:w-auto`}
           >
             <svg
               className="absolute left-[-25%] w-5 fill-current z-10 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:left-1 group-hover:fill-white"
@@ -113,9 +219,9 @@ const HeroSectionText = () => {
         
         <Link href="/aboutus">
           <button
-            className="relative flex items-center gap-2 px-8 py-3 font-semibold rounded-full overflow-hidden cursor-pointer
+            className="hidden sm:relative sm:flex items-center gap-2 px-8 py-3 font-semibold rounded-full overflow-hidden cursor-pointer
               text-base transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group text-gray-300 hover:text-white
-              hover:bg-gray-700/50 backdrop-blur-sm active:scale-95"
+              hover:bg-white/10 backdrop-blur-md active:scale-95 border border-white/20 shadow-lg hover:shadow-xl"
           >
             <span>Explore Services</span>
             <svg
@@ -130,8 +236,25 @@ const HeroSectionText = () => {
         </Link>
       </motion.div>
 
-      {/* Replaced Support Section with Stats */}
-
+      {/* Scroll Indicator - hidden on mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1 h-3 bg-white/60 rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

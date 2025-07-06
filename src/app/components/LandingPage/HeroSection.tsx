@@ -74,8 +74,16 @@ const HeroSection = () => {
         />
       )}
       
-      <HeroSectionText />
-      <StatsSection/>
+      {/* Additional overlay for better text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-0"></div>
+      
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1">
+        <HeroSectionText />
+      </div>
+      
+      <div className="relative z-10 pb-8">
+        <StatsSection />
+      </div>
 
     </div>
   );
