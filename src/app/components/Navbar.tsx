@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { FaHome, FaInfoCircle, FaCogs, FaQuestionCircle, FaBars, FaTimes } from 'react-icons/fa';
@@ -35,7 +35,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!mounted) return;
-    
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       if (lastScrollY.current !== scrollY) {
@@ -93,8 +93,7 @@ const Navbar = () => {
                   </span>
                   <span
                     className={`absolute top-1/2 left-1/2 z-0 w-5 h-5 rounded-full opacity-0 transform -translate-x-1/2 -translate-y-1/2
-                      transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[200px] group-hover:h-[200px] group-hover:opacity-100 ${circleColor}`}
-                  ></span>
+                      transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[200px] group-hover:h-[200px] group-hover:opacity-100 ${circleColor}`}></span>
                   <svg
                     className="absolute right-3 w-5 fill-current z-10 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:right-[-25%] group-hover:fill-white"
                     viewBox="0 0 24 24"
@@ -109,7 +108,7 @@ const Navbar = () => {
             <button
               className="md:hidden focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? (
                 <FaTimes className={`text-2xl ${textColor}`} />
@@ -121,41 +120,53 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Styled Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white/80 backdrop-blur-md shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 h-full w-64 z-40 transform transition-transform duration-500 ease-in-out
+          ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+         bg-black/70 shadow-2xl border-l border-blue-200 rounded-l-2xl`}
       >
-        <div className="flex flex-col p-6 space-y-8">
-          <div className="flex justify-between items-center">
-            <span className="text-xl font-bold text-primary">{navbarConfig.brand.name}</span>
+        <div className="flex flex-col h-full p-6 space-y-8">
+          <div className="flex justify-between items-center border-b pb-4">
+            <span className="text-2xl font-extrabold text-primary tracking-wide z-100">{navbarConfig.brand.name}</span>
           </div>
-          
-          <div className="flex flex-col space-y-6">
+
+          <div className="flex flex-col space-y-4">
             {navbarConfig.links.map((link) => (
-              <Link key={link.label} href={link.href} className={`flex items-center gap-3 text-primary group relative ${hoverColor}`} onClick={() => setIsMenuOpen(false)}>
-                {link.icon && <link.icon className='text-xl' />} {link.label}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-primary text-base font-medium transition-all duration-300 hover:bg-blue-200/60 hover:shadow-md`}
+              >
+                {link.icon && (
+                  <link.icon className="text-lg text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+                )}
+                {link.label}
               </Link>
             ))}
           </div>
 
-          <Link href={navbarConfig.cta.href} className="mt-8">
-            <button
-              className="w-full px-6 py-2 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition duration-200"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {navbarConfig.cta.label}
-            </button>
-          </Link>
+          <div className="mt-auto">
+            <Link href={navbarConfig.cta.href} onClick={() => setIsMenuOpen(false)}>
+              <button
+                className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark shadow-md hover:shadow-lg transition duration-300"
+              >
+                {navbarConfig.cta.label}
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 transition-opacity duration-300"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
+
       <style jsx>{`
         .group:hover .group-hover\\:w-full {
           width: 100% !important;
