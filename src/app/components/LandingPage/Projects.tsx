@@ -22,14 +22,27 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, className = "" }: ProjectCardProps) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind's md breakpoint
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const isHovered = hoveredImage === project.id;
   const isOtherHovered = hoveredImage && hoveredImage !== project.id;
 
   return (
     <div 
-      className={`relative group cursor-pointer bg-primary/20  rounded-2xl ${className}`}
-      onMouseEnter={() => onMouseEnter(project.id)}
-      onMouseLeave={onMouseLeave}
+      className={`relative group cursor-pointer bg-primary/20 rounded-2xl ${className}`}
+      onMouseEnter={() => !isMobile && onMouseEnter(project.id)}
+      onMouseLeave={() => !isMobile && onMouseLeave()}
     >
       <Image
         src={project.src}
@@ -37,21 +50,21 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
         fill
         quality={100}
         className={`rounded-3xl object-cover p-4 transition-all duration-300 ${
-          isOtherHovered ? 'blur-sm scale-95' : ''
-        } ${isHovered ? 'scale-105' : ''}`}
+          !isMobile && isOtherHovered ? 'blur-sm scale-95' : ''
+        } ${!isMobile && isHovered ? 'scale-105' : ''}`}
       />
-      
-      {/* Title overlay - hidden when hovered */}
-      <div className={`absolute bottom-4 left-4 ${isOtherHovered ? 'blur-sm scale-95' : ''} bg-black bg-opacity-50 text-white px-3 py-1 rounded z-10 ${
-        isHovered ? 'hidden' : 'flex'
+
+      {/* Title overlay */}
+      <div className={`absolute bottom-4 left-4 ${!isMobile && isOtherHovered ? 'blur-sm scale-95' : ''} bg-black bg-opacity-50 text-white px-3 py-1 rounded z-10 ${
+        !isMobile && isHovered ? 'hidden' : 'flex'
       }`}>
         {project.title}
       </div>
 
-      {/* Hover overlay */}
-      {isHovered && (
+      {/* Hover or always-visible overlay */}
+      {(isHovered || isMobile) && (
         <motion.div
-          className="absolute inset-0 bg-black/30 scale-105 rounded-lg flex flex-col justify-end p-4 pl-8 z-20"
+          className="absolute inset-0 bg-black/30 rounded-lg flex flex-col justify-end p-4 pl-8 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -64,6 +77,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
           >
             {project.description}
           </motion.p>
+
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -71,7 +85,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
           >
             <Link 
               href={project.link}
-              className="bg-primary px-2 py-2 md:px-5 md:py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 hover:bg-blue-800 text-white transition-transform duration-200 w-fit"
+              className="bg-primary px-2 py-2 md:px-5 md:py-2 rounded-lg text-sm font-bold shadow-lg hover:scale-105 hover:bg-blue-800 text-white transition-transform duration-200 w-fit"
             >
               View Project
             </Link>
@@ -81,6 +95,7 @@ const ProjectCard = ({ project, hoveredImage, onMouseEnter, onMouseLeave, classN
     </div>
   );
 };
+
 
 export default function Home() {
   const [hoveredImage, setHoveredImage] = useState<string | null>('Ram LLC');
